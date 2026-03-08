@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="CheckLists">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Lab01/CheckLists.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

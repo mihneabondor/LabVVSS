@@ -1,0 +1,76 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AbstractRepository<ID, E>
+enum CategorieBautura << enumeration >>
+class CsvExporter
+class DailyReportService
+class DrinkShopApp
+class DrinkShopController
+class DrinkShopService
+class FileAbstractRepository<ID, E>
+class FileOrderRepository
+class FileProductRepository
+class FileRetetaRepository
+class FileStocRepository
+class IngredientReteta
+class Order
+class OrderItem
+class OrderItemValidator
+class OrderService
+class OrderValidator
+class Product
+class ProductService
+class ProductTest
+class ProductValidator
+class ReceiptGenerator
+interface Repository<ID, E> << interface >>
+class Reteta
+class RetetaService
+class RetetaValidator
+class Stoc
+class StocService
+class StocValidator
+enum TipBautura << enumeration >>
+class ValidationException
+interface Validator<T> << interface >>
+
+AbstractRepository      -[#008200,dashed]-^  Repository             
+DailyReportService     "1" *-[#595959,plain]-> "repo\n1" Repository             
+DrinkShopController    "1" *-[#595959,plain]-> "service\n1" DrinkShopService       
+DrinkShopController    "1" *-[#595959,plain]-> "newRetetaList\n*" IngredientReteta       
+DrinkShopController    "1" *-[#595959,plain]-> "currentOrder\n1" Order                  
+DrinkShopController    "1" *-[#595959,plain]-> "currentOrderItems\n*" OrderItem              
+DrinkShopController    "1" *-[#595959,plain]-> "productList\n*" Product                
+DrinkShopController    "1" *-[#595959,plain]-> "retetaList\n*" Reteta                 
+DrinkShopService       "1" *-[#595959,plain]-> "report\n1" DailyReportService     
+DrinkShopService       "1" *-[#595959,plain]-> "orderService\n1" OrderService           
+DrinkShopService       "1" *-[#595959,plain]-> "productService\n1" ProductService         
+DrinkShopService       "1" *-[#595959,plain]-> "retetaService\n1" RetetaService          
+DrinkShopService       "1" *-[#595959,plain]-> "stocService\n1" StocService            
+FileAbstractRepository  -[#000082,plain]-^  AbstractRepository     
+FileOrderRepository     -[#000082,plain]-^  FileAbstractRepository 
+FileOrderRepository    "1" *-[#595959,plain]-> "productRepository\n1" Repository             
+FileProductRepository   -[#000082,plain]-^  FileAbstractRepository 
+FileRetetaRepository    -[#000082,plain]-^  FileAbstractRepository 
+FileStocRepository      -[#000082,plain]-^  FileAbstractRepository 
+Order                  "1" *-[#595959,plain]-> "items\n*" OrderItem              
+OrderItem              "1" *-[#595959,plain]-> "product\n1" Product                
+OrderItemValidator      -[#008200,dashed]-^  Validator              
+OrderService           "1" *-[#595959,plain]-> "orderRepo\n1" Repository             
+OrderValidator         "1" *-[#595959,plain]-> "itemValidator\n1" OrderItemValidator     
+OrderValidator          -[#008200,dashed]-^  Validator              
+Product                "1" *-[#595959,plain]-> "categorie\n1" CategorieBautura       
+Product                "1" *-[#595959,plain]-> "tip\n1" TipBautura             
+ProductService         "1" *-[#595959,plain]-> "productRepo\n1" Repository             
+ProductTest            "1" *-[#595959,plain]-> "product\n1" Product                
+ProductValidator        -[#008200,dashed]-^  Validator              
+Reteta                 "1" *-[#595959,plain]-> "ingrediente\n*" IngredientReteta       
+RetetaService          "1" *-[#595959,plain]-> "retetaRepo\n1" Repository             
+RetetaValidator         -[#008200,dashed]-^  Validator              
+StocService            "1" *-[#595959,plain]-> "stocRepo\n1" Repository             
+StocValidator           -[#008200,dashed]-^  Validator              
+@enduml

@@ -9,6 +9,13 @@ public class ProductValidator implements Validator<Product> {
 
         String errors = "";
 
+        if(product.getPret() <= 0.0)
+            errors += "Pretul trebuie sa fie pozitiv!\n";
+        if(product.getNume().length() < 6)
+            errors += "Numele trebuie sa aiba cel putin 6 caractere!\n";
+        if (!(product.getNume() instanceof String))
+            errors += "Numele trebuie sa fie un string!\n";{
+        }
         if (product.getId() <= 0)
             errors += "ID invalid!\n";
 

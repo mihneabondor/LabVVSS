@@ -6,11 +6,13 @@ public class OrderItemValidator implements Validator<OrderItem> {
 
     @Override
     public void validate(OrderItem item) {
-
         String errors = "";
 
-        if (item.getProduct().getId() <= 0)
+        if (item.getProduct() == null) {
+            errors += "Product cannot be null!\n";
+        } else if (item.getProduct().getId() <= 0) {
             errors += "Product ID invalid!\n";
+        }
 
         if (item.getQuantity() <= 0)
             errors += "Cantitate invalida!\n";

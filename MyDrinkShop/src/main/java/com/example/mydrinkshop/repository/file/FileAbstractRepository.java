@@ -11,7 +11,6 @@ public abstract class FileAbstractRepository<ID, E>
 
     protected FileAbstractRepository(String fileName) {
         this.fileName = fileName;
-        loadFromFile();
     }
 
     protected void loadFromFile() {
@@ -19,6 +18,7 @@ public abstract class FileAbstractRepository<ID, E>
 
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.isBlank()) continue;
                 E entity = extractEntity(line);
                 super.save(entity);
             }

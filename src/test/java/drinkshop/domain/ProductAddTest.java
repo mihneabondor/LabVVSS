@@ -9,17 +9,33 @@ import com.example.mydrinkshop.service.ProductService;
 import com.example.mydrinkshop.service.validator.ValidationException;
 import org.junit.jupiter.api.*;
 
+import java.io.File;
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ProductAddTest {
     private ProductService productService;
+    private File tempFile; // <-- Variabilă nouă pentru fișierul temporar
 
 
     @BeforeEach
-    public void setUp() {
-        Repository<Integer, Product> productRepo = new FileProductRepository("data/products.txt");
+    public void setUp() throws IOException {
+        // Creăm un fișier temporar gol, izolat pentru fiecare test în parte
+        tempFile = File.createTempFile("test_products_unit", ".txt");
+        tempFile.deleteOnExit();
+
+        Repository<Integer, Product> productRepo = new FileProductRepository(tempFile.getAbsolutePath());
         productService = new ProductService(productRepo);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        // Curățăm fișierul după ce se termină testul, ca să nu afecteze alte teste
+        if (tempFile != null && tempFile.exists()) {
+            tempFile.delete();
+        }
     }
 
     @Test

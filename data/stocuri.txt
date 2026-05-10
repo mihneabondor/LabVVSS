@@ -1,0 +1,10 @@
+1;cafea_macinata;1000;300
+2;apa;10000;2000
+3;lapte;5000;1000
+4;lapte_ovaz;3000;800
+5;matcha_pudra;500;100
+6;taro_pudra;500;100
+7;tapioca;2000;500
+8;ceai_verde;300;80
+9;lamaie;1000;200
+10;zahar;2000;500
